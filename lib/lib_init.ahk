@@ -52,7 +52,26 @@ Suspend, Off
 if(loadingAnimation != "0")
 	gosub, hideLoading
 
+gosub, InitFlashingWinTrigger
+
 return
+
+
+InitFlashingWinTrigger:  ;获取闪烁窗口id
+Gui +LastFound
+hWnd := WinExist() , DllCall( "RegisterShellHookWindow", UInt,hWnd )
+MsgNum := DllCall( "RegisterWindowMessage", Str,"SHELLHOOK" )
+OnMessage( MsgNum, "ShellMessage" )
+Return 
+
+ShellMessage( wParam,lParam ) {
+    global flashWinID
+    If ( wParam = 0x8006 ) ;  0x8006 is 32774 as shown in Spy!
+        {
+            ;global flashWinID				
+		    flashWinID := lParam				      
+        }
+}
 
 getDefaultBrowser:
 global defaultBrowser

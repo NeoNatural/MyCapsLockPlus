@@ -1,3 +1,6 @@
+
+
+
 #SingleInstance force
 
 ; If the script is not elevated, relaunch as administrator and kill current instance:
@@ -24,7 +27,7 @@ Menu, Tray, Icon,,, 1
 SetStoreCapslockMode, Off
 
 global CLversion:="Version: 3.2.0.0 | 2020-10-24`n`nCopyright Junkai Chen" 
-
+global flashWinID
 global cClipboardAll ;capslock+ clipboard
 global caClipboardAll ;capslock+alt clipboard
 global sClipboardAll ;system clipboard
@@ -66,6 +69,9 @@ allowRunOnClipboardChange:=true
 #include ..\userAHK
 #include *i main.ahk
 
+
+
+
 #MaxHotkeysPerInterval 500
 #NoEnv
 ;  #WinActivateForce
@@ -73,7 +79,7 @@ Process Priority,,High
 
 
 start:
-
+<!F4:: WinActivate, ahk_id %flashWinID%
 ;-----------------START-----------------
 global CapsLock2, CapsLock
 
@@ -130,7 +136,6 @@ if (allowRunOnClipboardChange && !CapsLock && CLsets.global.allowClipboard != "0
 }
 allowRunOnClipboardChange:=true
 return
-
 
 ;----------------------------keys-set-start-----------------------------
 
@@ -808,7 +813,8 @@ return
 
 
 
-GuiClose:
-GuiEscape:
-Gui, Cancel
-return
+;GuiClose:
+;GuiEscape:
+;Gui, Cancel
+;return
+

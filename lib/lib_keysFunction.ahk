@@ -1000,6 +1000,11 @@ keyFunc_goCjkPage(){
     return
 }
 
+keyFunc_JumpToFlashWin(){
+    global flashWinID
+    WinActivate, ahk_id %flashWinID%
+    return
+}
  
 ;keys functions end-------------
 ; testing arer ---
